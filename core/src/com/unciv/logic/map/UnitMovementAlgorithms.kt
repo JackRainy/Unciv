@@ -275,9 +275,13 @@ class UnitMovementAlgorithms(val unit:MapUnit) {
                 return tile.airUnits.size<6 && tile.getCity()?.civInfo==unit.civInfo
             else if(tile.militaryUnit!=null) {
                 val unitAtDestination = tile.militaryUnit!!
+
+                var unitCapacity = if (unitAtDestination.getUniques().contains("Can carry 2 aircraft")) 2 else 0
+                unitCapacity += unitAtDestination.getUniques().count { it == "Can carry 1 extra air unit" }
+
                 return ((unitAtDestination.type.isAircraftCarrierUnit() && !unit.type.isMissileUnit()) ||
                         (unitAtDestination.type.isMissileCarrierUnit() && unit.type.isMissileUnit()))
-                        && unitAtDestination.owner==unit.owner && tile.airUnits.size<(2+unit.getUniques().count { it == "Can carry 1 extra air unit" })
+                        && unitAtDestination.owner==unit.owner && tile.airUnits.size < unitCapacity
             } else
                 return false
 

@@ -860,9 +860,10 @@
 		"name": "Carrier",
 		"unitType": "WaterAircraftCarrier",
 		"movement": 5,
-		"strength": 30,
-		"cost": 325,
-		"requiredTech": "Flight",
+		"strength": 40,
+		"cost": 375,
+		"requiredTech": "Electronics",
+        "uniques": ["Can carry 2 aircraft"],
 		"hurryCostModifier": 20
 	},
 	{
